@@ -174,6 +174,12 @@ def get_thread_list(title="", forum="", user="", since="", limit=-1, order="desc
 
     return thread_list
 
+def get_params(request):
+    if request.method == 'GET':
+        return dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+
+    return request.json
+
 def get_subscribed_list(email):
 
     params = {}

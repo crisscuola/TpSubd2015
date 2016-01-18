@@ -112,7 +112,7 @@ def user_create():
 @app.route("/db/api/user/details/", methods=["GET"])
 def user_details():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	email = data.get('user')
 	if not email:
@@ -174,7 +174,7 @@ def unfollow():
 @app.route("/db/api/user/listFollowers/", methods=["GET"])
 def list_followers():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	email = data.get('user')
 	if not email:
@@ -247,7 +247,7 @@ def list_followers():
 @app.route("/db/api/user/listFollowing/", methods=["GET"])
 def list_following():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	email = data.get('user')
 	if not email:
@@ -311,7 +311,7 @@ def list_following():
 @app.route("/db/api/user/listPosts/", methods=["GET"])
 def user_list_posts():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	email = data.get('user')
 	if not email:
@@ -425,7 +425,7 @@ def forum_create_forum():
 @app.route("/db/api/forum/details/", methods=["GET"])
 def forum_details():
 
-    data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
     
     short_name = data.get('forum')
 
@@ -451,7 +451,7 @@ def forum_details():
 @app.route("/db/api/forum/listPosts/", methods=["GET"])
 def forum_list_posts():
 
-    data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
     forum = data.get('forum')
 
@@ -508,7 +508,7 @@ def forum_list_posts():
 @app.route("/db/api/forum/listThreads/", methods=["GET"])
 def forum_list_threads():
 
-    data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
     forum = data.get('forum')
 
@@ -559,7 +559,7 @@ def forum_list_threads():
 @app.route("/db/api/forum/listUsers/", methods=["GET"])
 def forum_list_users():
 
-    data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
     if not data.get('forum'):
     	return_data = {"code": 2, "response": RESPONSE_CODE_2}
@@ -674,7 +674,7 @@ def thread_create():
 @app.route("/db/api/thread/details/", methods=["GET"])
 def thread_details():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	thread_id = data.get('thread')
 	if not thread_id:
@@ -720,7 +720,7 @@ def thread_details():
 @app.route("/db/api/thread/list/", methods=["GET"])
 def thread_list_method():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	if data.get('forum'):
 		key = "forum"
@@ -751,7 +751,7 @@ def thread_list_method():
 @app.route("/db/api/thread/listPosts/", methods=["GET"])
 def thread_list_posts():
 
-    data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems()) 
+	data = get_params(request)
 
     thread = data.get('thread')
     since = data.get('since', '')
@@ -977,7 +977,7 @@ def post_create():
 @app.route("/db/api/post/details/", methods=["GET"])
 def post_details():
 
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
+	data = get_params(request)
 
 	post_id = data.get('post')
 	if not post_id:
@@ -1032,8 +1032,6 @@ def post_details():
 
 @app.route("/db/api/post/list/", methods=["GET"])
 def post_list_method():
-
-	data = dict((k, v if len(v) > 1 else v[0]) for k, v in urlparse.parse_qs(request.query_string).iteritems())
 
 
 	forum = data.get('forum')
