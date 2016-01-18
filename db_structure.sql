@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `User` (
 
 	PRIMARY KEY (`user`),
 	UNIQUE KEY (`email`),
-	UNIQUE KEY `name_email` (`name`, `email`)
+	UNIQUE KEY name_email (name, email)
 
 ) DEFAULT CHARSET=utf8;
 
@@ -53,7 +53,7 @@ CREATE TABLE IF NOT EXISTS `Post` (
 
 	PRIMARY KEY (`post`),
 	UNIQUE KEY `user_date` (`user`, `date`),
-	KEY `forum_date`(`forum`, `date`),
+	KEY (`forum`, `date`),
 	KEY `thread_date` (`thread`, `date`)
 
 	
@@ -78,8 +78,7 @@ CREATE TABLE IF NOT EXISTS `Thread` (
 
 	PRIMARY KEY (`thread`),
 	UNIQUE KEY (`title`),
-	KEY (`user`),
-	KEY (`forum`)
+	KEY (user)
 
 ) DEFAULT CHARSET=utf8;
 
@@ -87,16 +86,13 @@ CREATE TABLE IF NOT EXISTS `Subscription` (
 	`subscriber` VARCHAR(50) NOT NULL, 					
 	`thread` INT NOT NULL, 								
 
-	UNIQUE KEY `subscriber_thread`(`subscriber`, `thread`)
+	PRIMARY KEY (`subscriber`, `thread`)
 ) DEFAULT CHARSET=utf8;
 
 
 CREATE TABLE IF NOT EXISTS `Follower` (
 	`follower` VARCHAR(50) NOT NULL, 					
-	`following` VARCHAR(50) NOT NULL, 
+	`following` VARCHAR(50) NOT NULL 					
 
-	UNIQUE KEY `follower_following`(`follower`, `following`)
-					
 ) DEFAULT CHARSET=utf8;
-
 
