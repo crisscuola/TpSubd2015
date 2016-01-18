@@ -102,10 +102,6 @@ def user_create():
 
 		return jsonify(return_data)
 
-	#user_dict = dictionary_of_user(email)
-
-	#return_data = {"code": 0, "response": user_dict}
-
 	response_data = {"id": my_last, "email": email, 'name': name, 'username': username, 'isAnonymous': is_anonymous, 'about': about}
 
 	return_data = {"code": 0, "response": response_data}
@@ -423,11 +419,6 @@ def forum_create_forum():
 
         return_data = {"code": 0, "response": forum_dict}
 
-
-		# response_data = {"id": my_last, "name": name, "short_name": short_name, "user": user}
-
-		# return_data = {"code": 0, "response": response_data}
-
 	return jsonify(return_data)
 
 
@@ -469,7 +460,7 @@ def forum_list_posts():
 
     	return jsonify(return_data)
 
-    # Related part
+
     related_values = list()
     data_related = data.get('related')
     if type(data_related) is list:
@@ -532,7 +523,7 @@ def forum_list_threads():
     limit = data.get('limit', -1)
     thread_list = get_thread_list(forum=forum, since=since, order=order, limit=limit)
 
-    # Related part
+
     related_values = list()
     data_related = data.get('related')
     if type(data_related) is list:
@@ -575,7 +566,7 @@ def forum_list_users():
 
     	return jsonify (return_data)
 
-    # Since id part
+
     since_id = data.get('since_id')
     if since_id:
         try:
@@ -590,7 +581,6 @@ def forum_list_users():
     else:
         since_id_sql = ''
 
-    # Limit part
     if data.get('limit'):
         limit = data.get('limit')[0]
         try:
@@ -610,7 +600,6 @@ def forum_list_users():
     else:
         limit_sql = ''
 
-    # Order part
     order_part = data.get('order', 'desc')
     order_sql = """ORDER BY User.name {}""".format(order_part)
 
@@ -642,7 +631,6 @@ def thread_create():
 	data = request.get_json()
 
 	forum = data['forum']
-	#title = encode(data.get('title'))
 
 	title = (data.get('title').encode('utf-8'))
 
